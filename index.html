@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paystack Payment</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover:not(.active) {
+      background-color: #111;
+    }
+    
+    .active {
+      background-color: #04AA6D;
+    }
+    </style>
+
+</head>
+<body>
+
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+
+
+      <br>
+
+      <div class="container">
+        <div class="jumbotron">
+            <h1>Hello, world!</h1>
+            <p>
+                This is a simple hero unit, a simple jumbotron-style component for calling 
+                extra attention to featured content or information.
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img src="pexels-matthew-barra-812875.jpg" alt="...">
+                <div class="caption">
+                  <h3>Product 1</h3>
+                  <p>Best price deal</p>
+                  <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="pexels-valeria-boltneva-965993.jpg" alt="...">
+                  <div class="caption">
+                    <h3>Product 1</h3>
+                    <p>Best price deal</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="pexels-vanessa-ramirez-1560288.jpg" alt="...">
+                  <div class="caption">
+                    <h3>Product 1</h3>
+                    <p>Best price deal</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                  </div>
+                </div>
+                <button class="btn btn-success" onclick="payWithPaystack()">Pay 50,000</button>
+                <br>
+                <br>
+              </div>
+
+   
+              <br>
+              <br>
+
+              
+          </div>
+
+      </div>
+
+      <script>
+
+
+function payWithPaystack() {
+
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_d9e9bc65da4f6e545295797da32a0f1e042260cc', // Replace with your public key
+    email: 'akomwriter@gmail.com',
+    amount: 50000 * 100,
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    // label: "Optional string that replaces customer email"
+    onClose: function(){
+      alert('Window closed.');
+    },
+    callback: function(response){
+      let message = 'Payment complete! Reference: ' + response.reference;
+      alert(message);
+    }
+  });
+
+  handler.openIframe();
+}
+
+
+      </script>
+    
+</body>
+</html>
